@@ -1,45 +1,48 @@
 // solution 1
-function likes(names) {
-    const [firstN, secondN, ...rest] = names;
-    return  !names.length? 'no one likes this'
-      : names.length == 1? `${firstN} likes this` 
-      : names.length == 2? `${firstN} and ${secondN} like this` 
-      : names.length == 3? `${firstN}, ${secondN} and ${rest} like this`
-      : `${firstN}, ${secondN} and ${rest.length} others like this`;
-  }
+// const getCard = () =>
+//   [...`BINGO`].reduce((pre, val, idx) => {
+//     const arr = [];
+//     while (arr.length < 5) {
+//       let num = Math.ceil((Math.random() + idx) * 15);
+//       if (!arr.includes(num)) arr.push(num);
+//     }
+//     return pre.concat((idx - 2 ? arr : arr.slice(0, -1)).map(num => val + num));
+//   }, []);
+  
 // solution 2
-function likes(names) {
-    let a = " like this";
-    let b = " likes this";
-    let l = names.length;
-    return !l ? "no one" + b
-     : l == 1 ? names[0] + b
-     : l == 2 ? names.join(" and ") + a
-     : l == 3 ? names.join(" and ").replace(" and", ",") + a
-     : names[0] + ", " + names[1] + " and " + (l-2) + " others" + a;
-  }
+// function getCard() {
+//   const getRandom = (e, i, r=[]) => {      
+//     const a = 1 + 15 * i;
+//     const b = (i + 1) * 15;      
+//     while (r.length < (e == 'N' ? 4 : 5)){
+//         const newItem = Math.round(Math.random() * (b - a) + a);
+//         if (!r.includes(e + newItem)) r.push(e + newItem)
+//     }      
+//     return r
+//   }     
+//   return [].concat(...['B','I','N','G','O'].map((e,i)=>getRandom(e,i)));
+// }
 
 // solution 3
-function likes(names) {
-    var a = names.length;
-    switch (a) {
-        case 0: return "no one likes this"; break;
-        case 1: return `${names[0]} likes this`; break;
-        case 2: return `${names[0]} and ${names[1]} like this`; break;
-        case 3: return `${names[0]}, ${names[1]} and ${names[2]} like this`; break;
-        default: return `${names[0]}, ${names[1]} and ${a-2} others like this`; break;
-    }
+const getCard=()=> {
+  let arr=[];
+  const str = "BINGO"
+  const r=(v)=>Math.random()*14+v
+  let z=1
+  let max
+  
+  for (let j=0; j< str.length; ++j){
+    max= j===2 ? 4:5
+    
+     for (let i=0; i<max; ++i){
+       arr.push(str[j]+r(z))
   }
-// solution 4
+   z+=15
+     
+  }
 
-function likes(names) {
-    const sum=names.length
-     if (sum===0) return 'no one likes this';
-     if (sum===1) return `${names[0]} likes this`;
-     if (sum===2) return `${names[0]} and ${names[1]} like this`;
-     if (sum===3) return `${names[0]}, ${names[1]} and ${names[2]} like this`;
-     return `${names[0]}, ${names[1]} and ${sum-2} others like this`;
-   }
+return arr
+}
+  
 
-console.log(likes(['Peter']));
-console.log(likes(['Alex', 'Jacob', 'Mark', 'Max']));
+console.log(getCard());
